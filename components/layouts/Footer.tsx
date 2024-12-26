@@ -25,6 +25,7 @@ import { useTenancy } from "@/configs/providers/TenancyProvider";
 import { ContentSettingType, Respond } from "@/constants/type";
 import { clientAction } from "@/configs/redux/client-slice";
 import httpClient from "@/configs/axios/api";
+import { usePathname } from "next/navigation";
 
 const descriptionText = {
   gap: 1,
@@ -45,6 +46,7 @@ const Footer = ({ dir }: any) => {
   const t = useTranslations();
   const tenancy:any = useTenancy()
   const dispatch = useDispatch()
+  const pathName = usePathname()
   
   const titleFooter = {
     fontSize: ["12.6px", "12.6px", "17px", "17px"],
@@ -76,6 +78,10 @@ const Footer = ({ dir }: any) => {
       })()
     }
   }, [tenancy])
+
+  if (pathName.includes("promotion")) {
+    return null
+  }
   
   return (
     <Flex

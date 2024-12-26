@@ -15,6 +15,8 @@ import RouterListener from '@/constants/hooks/RouterListener';
 import Footer from '@/components/layouts/Footer';
 import LoginAndRegisterModal from '@/components/layouts/navbar/LoginAndRegisterModal';
 import ForgotPwModal from '@/components/layouts/navbar/ForgotPwModal';
+import ScrollToTop from '@/components/layouts/ScrollToTop';
+import QuickLounchBox from '@/components/layouts/QuickLounchBox';
 
 type TMain = {
   children: React.ReactNode;
@@ -33,6 +35,8 @@ const Main = ({children}: TMain) => {
                 {children}
                 <Footer />
                 <LoginAndRegisterModal />
+                <ScrollToTop />
+                <QuickLounchBox />
                 <ForgotPwModal/>
                 <LanguageModal/>
                 <RouterListener/>

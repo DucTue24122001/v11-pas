@@ -52,8 +52,7 @@ const AgentBankItem = ({bank, ...props}: PropsType) => {
           {bank?.imageUrl && 
           // bank?.statusImage &&
             <Flex flexDir={'column'} gap={1}>
-            <Image alt='qr-code' boxSize={"120px"} mr={["30px","30px","0px","0px"]}
-            src={bank.imageUrl} />
+            <Image alt='qr-code' boxSize={"120px"} mr={["30px","30px","0px","0px"]} src={bank.imageUrl} />
             <Button colorScheme='whatsapp' w={"110px"} h={"30px"} padding={"5px"} alignSelf={'center'}
               display={["block","block","none","none"]} mr={["30px","30px","0px","0px"]} fontWeight={400}
               onClick={() => downloadFile(bank.imageUrl)}>

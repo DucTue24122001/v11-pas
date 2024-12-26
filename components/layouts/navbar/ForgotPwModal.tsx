@@ -5,11 +5,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { CheckCircleIcon } from '@chakra-ui/icons'
 import { IoCloseCircle } from 'react-icons/io5'
 import { RootState } from '@/configs/redux/store'
-import ClientService from '@/helpers/ClientService'
 import { useTenancy } from '@/configs/providers/TenancyProvider'
 import { useTranslations } from 'next-intl'
 import { clientAction } from '@/configs/redux/client-slice'
-import httpClient from '@/configs/axios/api'
 import DefaultInput from '@/components/utils/DefaultInput'
 import { ErrorText } from '@/components/utils/NotificationText'
 import DefaultButton from '@/components/utils/DefaultButton'
@@ -192,9 +190,9 @@ const ForgotPwModal = () => {
             </Flex>
           </Flex>
           <Box w={"100%"}>
-            <DefaultButton h={"40px"} colorScheme={"yellow"} type={"submit"} isDisabled={(isOtpSended && isPwError)}
+            <DefaultButton h={"40px"} type={"submit"} isDisabled={(isOtpSended && isPwError)}
             color={colors.default.white} fontWeight={600} w={"100%"}>
-            {!isLoading ? <Text textTransform={"uppercase"}>{t('submit')}</Text> : <Spinner/>}
+              {!isLoading ? <Text textTransform={"uppercase"}>{t('submit')}</Text> : <Spinner/>}
             </DefaultButton>
             <ErrorText textAlign={"end"}>{dataError}</ErrorText>
           </Box>

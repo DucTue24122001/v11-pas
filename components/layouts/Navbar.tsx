@@ -1,5 +1,5 @@
 import { Box, Flex, Image, Text, Link } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useTenancy } from '@/configs/providers/TenancyProvider'
 import { useDispatch, useSelector } from 'react-redux'
 import { clientAction } from '@/configs/redux/client-slice'
@@ -28,7 +28,7 @@ import zh from "@/public/images/ZH-CN.png"
 import { useBreakpoint } from '@/constants/hooks/useBreakpoint'
 
 const Navbar = () => {
-  const {language} = useSelector((state:RootState) => state.client)
+  const {language,isShowPromotionModal} = useSelector((state:RootState) => state.client)
   const tenancy:any = useTenancy()
   const dispatch = useDispatch()
   const locale = useLocale()
@@ -39,6 +39,12 @@ const Navbar = () => {
   const isLogin = ClientService.isAuthenticated();
   const isMobileBreakpoint = useBreakpoint(768)
   const t = useTranslations()
+  const [imgFlag, setImgFlag] = useState(<Image
+    src={en.src}
+    sx={langFlag}
+    alt="lang"
+    onClick={() => showModalLanguage()}
+  />)
   
 
   useEffect(() => {
@@ -53,73 +59,134 @@ const Navbar = () => {
     dispatch(clientAction.handleShowLanguageModal(true));
   };
 
-  const imageLanguage = () => {
+  // const imageLanguage = () => {
+  //   if (typeof window !== "undefined") {
+  //     const lang = window.localStorage.getItem("MY_LANGUAGE")
+  //     switch (lang) {
+  //       case "EN":
+  //         return (
+  //           <Image
+  //             src={en.src}
+  //             sx={langFlag}
+  //             alt="lang"
+  //             onClick={() => showModalLanguage()}
+  //             // display={checkLogin && isMobileBreakpoint ? "none" : "block"}
+  //           />
+  //         );
+  //       case "MY":
+  //         return (
+  //           <Image
+  //             src={my.src}
+  //             sx={langFlag}
+  //             alt="lang"
+  //             onClick={() => showModalLanguage()}
+  //             // display={checkLogin && isMobileBreakpoint ? "none" : "block"}
+  //           />
+  //         );
+  //       case "KM":
+  //         return (
+  //           <Image
+  //             src={km.src}
+  //             sx={langFlag}
+  //             alt="lang"
+  //             onClick={() => showModalLanguage()}
+  //             // display={checkLogin && isMobileBreakpoint ? "none" : "block"}
+  //           />
+  //         );
+  //       case "TH":
+  //         return (
+  //           <Image
+  //             src={th.src}
+  //             sx={langFlag}
+  //             alt="lang"
+  //             onClick={() => showModalLanguage()}
+  //             // display={checkLogin && isMobileBreakpoint ? "none" : "block"}
+  //           />
+  //         );
+  //       case "ZH-CN":
+  //         return (
+  //           <Image
+  //             src={zh.src}
+  //             sx={langFlag}
+  //             alt="lang"
+  //             onClick={() => showModalLanguage()}
+  //             // display={checkLogin && isMobileBreakpoint ? "none" : "block"}
+  //           />
+  //         );
+  //       default:
+  //         return (
+  //           <Image
+  //             src={`/img/en.png`}
+  //             sx={langFlag}
+  //             alt="lang"
+  //             onClick={() => showModalLanguage()}
+  //             // display={checkLogin && isMobileBreakpoint ? "none" : "block"}
+  //           />
+  //         );
+  //     }
+  //   }
+  // };
+   useEffect(() => {
     if (typeof window !== "undefined") {
       const lang = window.localStorage.getItem("MY_LANGUAGE")
       switch (lang) {
         case "EN":
           return (
-            <Image
+            setImgFlag(<Image
               src={en.src}
               sx={langFlag}
               alt="lang"
               onClick={() => showModalLanguage()}
-              // display={checkLogin && isMobileBreakpoint ? "none" : "block"}
-            />
-          );
+            />)
+          )
         case "MY":
           return (
-            <Image
+            setImgFlag(<Image
               src={my.src}
               sx={langFlag}
               alt="lang"
               onClick={() => showModalLanguage()}
-              // display={checkLogin && isMobileBreakpoint ? "none" : "block"}
-            />
-          );
+            />)
+          )
         case "KM":
           return (
-            <Image
+            setImgFlag(<Image
               src={km.src}
               sx={langFlag}
               alt="lang"
               onClick={() => showModalLanguage()}
-              // display={checkLogin && isMobileBreakpoint ? "none" : "block"}
-            />
-          );
+            />)
+          )
         case "TH":
           return (
-            <Image
+            setImgFlag(<Image
               src={th.src}
               sx={langFlag}
               alt="lang"
               onClick={() => showModalLanguage()}
-              // display={checkLogin && isMobileBreakpoint ? "none" : "block"}
-            />
-          );
+            />)
+          )
         case "ZH-CN":
           return (
-            <Image
+            setImgFlag(<Image
               src={zh.src}
               sx={langFlag}
               alt="lang"
               onClick={() => showModalLanguage()}
-              // display={checkLogin && isMobileBreakpoint ? "none" : "block"}
-            />
-          );
+            />)
+          )
         default:
           return (
-            <Image
-              src={`/img/en.png`}
+            setImgFlag(<Image
+              src={en.src}
               sx={langFlag}
               alt="lang"
               onClick={() => showModalLanguage()}
-              // display={checkLogin && isMobileBreakpoint ? "none" : "block"}
-            />
-          );
+            />)
+          )
       }
     }
-  };
+  },[language])
 
   const handleOpenTelegramBot = () => {
     if (tenancy) {     
@@ -131,7 +198,7 @@ const Navbar = () => {
   }
 
   return (
-    <Flex overflow={"visible"} justifyContent={"center"} alignItems={"center"} flexDir={"column"} bg={"#fff"} pos={"sticky"} zIndex={1100} top={0} boxShadow={"0 4px 4px rgba(0, 0, 0, 0.4)"}>
+    <Flex display={isShowPromotionModal === true ? ["none","none","flex","flex"] : "flex"} overflow={"visible"} justifyContent={"center"} alignItems={"center"} flexDir={"column"} bg={"#fff"} pos={"sticky"} zIndex={1100} top={0} boxShadow={"0 4px 4px rgba(0, 0, 0, 0.4)"}>
       <Flex w={"100%"}>
       {announcements?.result?.length > 0 && <Marquee pauseOnHover={true}
         gradient={false}
@@ -171,10 +238,10 @@ const Navbar = () => {
                   <Image src={teletgram_ico.src} w={["30px","35px"]} objectFit={"contain"}/>
                   <Text textTransform={"uppercase"} display={["none","none","block","block"]} fontWeight={600} color={colors.default.white}>{t('connect')}</Text>
               </Flex>
-              {imageLanguage()}
+              {imgFlag}
             </Flex>
         </Flex>
-        <Flex display={as == "/" ? ["flex","flex"] : ["none","flex"]}>
+        <Flex display={as == "/" ? ["flex","flex"] : ["none","none"]}>
           <HomeCategory />
         </Flex>
       </Box>

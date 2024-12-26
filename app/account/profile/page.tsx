@@ -35,7 +35,7 @@ const Profile = () => {
           <Text minW={["170px","170px","300px","300px"]}>{t('referral_code')}</Text>
           <Center gap={5} flexWrap={"wrap"}>
             <Text>{accountDetail?.referralCode}</Text>
-            <CopyButton h={"30px"} copyText={accountDetail?.referralCode}/>
+            <CopyButton bgColor={"#00237d"} h={"30px"} copyText={accountDetail?.referralCode}/>
           </Center>
         </Flex>
         </Box>

@@ -1,3 +1,4 @@
+import { border } from '@/configs/chakra-ui/color'
 import { accountAction } from '@/configs/redux/account-slice'
 import { RootState } from '@/configs/redux/store'
 import { ChevronLeftIcon } from '@chakra-ui/icons'
@@ -10,19 +11,17 @@ const InboxInfo = () => {
   const dispatch = useDispatch()
   
   return (
-    <>
-      <Box>
-        <Flex minH={"50px"} alignItems={'center'} borderBottom={"1px solid #d9dee4"} w={"100%"}>
-          <Center cursor={'pointer'} onClick={() => dispatch(accountAction.setCurrentMailRead(null))}>
-            <ChevronLeftIcon fontSize={20} color={"rgba(48,48,48,.54)"}/>
-            <Text ml={"5px"} fontSize={16} fontWeight={700}>{currentMailRead.subject}</Text>
-          </Center>
-        </Flex>
-        <Box p={"20px 5px"}>
-          <Text>{currentMailRead.body}</Text>
-        </Box>
+    <Box>
+      <Flex minH={"50px"} alignItems={'center'} borderBottom={border.table} w={"100%"}>
+        <Center cursor={'pointer'} onClick={() => dispatch(accountAction.setCurrentMailRead(null))}>
+          <ChevronLeftIcon fontSize={20} color={"rgba(48,48,48,.54)"}/>
+          <Text ml={"5px"} fontSize={16} fontWeight={700}>{currentMailRead.subject}</Text>
+        </Center>
+      </Flex>
+      <Box p={"20px 5px"}>
+        <Text>{currentMailRead.body}</Text>
       </Box>
-    </>
+    </Box>
   )
 }
 

@@ -60,12 +60,12 @@ const SideMenu = () => {
         <Flex
           py={"4px"}
           flexDir={"column"}
-          fontSize={13}
+          fontSize={16}
           gap={"2px"}
           color={colors.default.black}
         >
           <Text>User: {accountStatus?.name}</Text>
-          <Flex gap={1}>
+          <Flex gap={1}> 
             ID:
             <Flex
               cursor={"pointer"}
@@ -101,7 +101,7 @@ const SideMenu = () => {
               {navItem.map((item, i) => (
                 <Link href={item.href} key={i} onClick={() => dispatch(clientAction.handleShowMenu(false))}>
                   <Flex sx={topMenuItem}>
-                    <Box fontSize={"18px"}>
+                    <Box fontSize={"24px"}>
                       {item.icon}
                     </Box>
                     <Text>{t(item.name)}</Text>
@@ -116,13 +116,13 @@ const SideMenu = () => {
         <Flex flexDir={"column"}>
           <Link href={`/${PageEnum.Policies}/${PoliciesEnum.Terms}`}>
             <Flex sx={topMenuItem} >
-              <Box fontSize={"18px"}>
+              <Box fontSize={"24px"}>
                 <MdOutlinePolicy />
               </Box>
               <Text>{t("policies")}</Text>
             </Flex>
           </Link>
-          <Flex
+          {/* <Flex
             sx={topMenuItem}
             gap={"10px"}
             onClick={() => {
@@ -132,7 +132,7 @@ const SideMenu = () => {
           >
             <ImageLanguage boxSize={"19px"}/>
             <Text>{t("languages")}</Text>
-          </Flex>
+          </Flex> */}
 
           {/* Logout */}
           {accountStatus?.isLogin && (
@@ -145,7 +145,7 @@ const SideMenu = () => {
                 router.push("/");
               }}
             >
-              <Box fontSize={"20px"}>
+              <Box fontSize={"24px"}>
                 <MdLogout />
               </Box>
               <Text>{t("logout")}</Text>

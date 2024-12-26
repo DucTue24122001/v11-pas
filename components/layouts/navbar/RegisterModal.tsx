@@ -143,15 +143,17 @@ const RegisterModal = () => {
       alignItems={"center"}
     >
       <Flex
+        w={"100%"}
         flexDir={"column"}
         justifyContent={"center"}
         alignItems={"center"}
       >
-        <form onSubmit={submitForm}>
+        <form style={{width:"inherit"}} onSubmit={submitForm}>
           <SimpleGrid
             w={["100%", "100%", "400px", "400px"]}
             spacingX={10}
             spacingY={4}
+            margin={"auto"}
           >
             <Box>
               <DefaultSelect placeholder={tenancy?.currency || ""} isDisabled />
@@ -193,7 +195,7 @@ const RegisterModal = () => {
             <Box>
               <DefaultInput
                 name={"name"}
-                placeholder={`${t("same_bank")} *`}
+                placeholder={`${t("full_name")} *`}
                 value={registForm.name}
                 onChange={formHandler}
               />

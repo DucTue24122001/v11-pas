@@ -16,6 +16,8 @@ import DefaultButton from '@/components/utils/DefaultButton'
 import DefaultSelectDateInput from '@/components/utils/calendar/DefaultSelectDateInput'
 import RecordsDisplay from '@/components/account/records/RecordsDisplay'
 import Pagination from '@/components/utils/pagination/Pagination'
+import ResponsiveRecordDisplay from '@/components/account/records/ResponsiveRecordDisplay'
+import RecordsTableDisplay from '@/components/account/records/RecordsTableDisplay'
 
 const Records = () => {
   const pageSize = 10
@@ -88,9 +90,9 @@ const Records = () => {
 
   return (
     <>
-      <Card p={"5px"} gap={5} mb={isShowCalendar ? 60 : 0}>
-        <Flex maxW={"100%"} gap={"10px"} flexDir={"column"}>
-          <Box w={"100%"}>
+      <Card p={["5px","5px","50px","50px"]} gap={5} mb={isShowCalendar ? 60 : 0}>
+        <Flex maxW={"100%"} gap={"10px"} flexDir={["column","column","column","row"]}>
+          <Box w={["100%","100%","100%","25%"]}>
             <Text sx={recordTitle}>{t('transaction_type')}</Text>
             <SelectDropdown isDropdown={isTransactionTypeDropdown} closeDropdown={() => setIsTransactionTypeDropdown(false)} openDropdown={() => setIsTransactionTypeDropdown(true)}
               currentSelect={<Text>{!transactionTypeValue ? t('all') : t(`${transactionTypeValue}`)}</Text>}
@@ -99,11 +101,11 @@ const Records = () => {
                 onClick={() => selectTransactionType(type)}>{t(`${type.name}`)}</DropdownItem>
               ))}/>
           </Box>
-          <Box w={"100%"}>
+          <Box w={["100%","100%","100%","25%"]}>
             <Text sx={recordTitle}>{t('transaction_period')}</Text>
             <DefaultSelectDateInput selectDate={selectDateHandler} isSearchMonth={true} setShowCalendar={(value: any) => setIsShowCalendar(value)}/>
           </Box>
-          <Box w={"100%"}>
+          <Box w={["100%","100%","100%","25%"]}>
             <Text sx={recordTitle}>{t('payment_type')}</Text>
             <SelectDropdown isDropdown={isPaymentTypeDropdown} openDropdown={() => setIsPaymentTypeDropdown(true)} closeDropdown={() => setIsPaymentTypeDropdown(false)}
               currentSelect={<Text>{!paymentTypeValue ? t('all') : t(paymentTypeValue.toLowerCase())}</Text>}
@@ -114,19 +116,19 @@ const Records = () => {
                 </DropdownItem>
               ))}/>
           </Box>
-          <DefaultButton color={"#fff"} alignSelf={"flex-start"} w={"100%"}
+          <DefaultButton h={"35px"} alignSelf={["flex-start","flex-start","flex-start","flex-end"]} w={["100%","100%","100%","12%"]}
             onClick={searchingRecordHandle}>
             <AiOutlineSearch/>
             <Text ml={2}>{t('search')}</Text>
           </DefaultButton>
         </Flex>
-        <RecordsDisplay currentPage={currentPage}/>
+        {accountBreakpoint ? <ResponsiveRecordDisplay currentPage={currentPage}/> : <RecordsTableDisplay currentPage={currentPage}/>}
         <Flex justifyContent={'center'} mb={20}>
           <Pagination
           pageSize={pageSize}
           totalCount={totalCount}
           currentPage={currentPage}
-          onPageChange={(page: number) => handlePageChange(page)}/>
+          onPageChange={(page: any) => handlePageChange(page)}/>
         </Flex>
       </Card>
     </>

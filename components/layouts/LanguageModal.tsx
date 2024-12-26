@@ -17,7 +17,7 @@ const LanguageModal = () => {
     setUserLocale(language);
     dispatch(clientAction.setLanguage(language))
     dispatch(clientAction.handleShowLanguageModal(false))
-    window.localStorage.setItem("MY_LANGUAGE", language)
+    localStorage.setItem("MY_LANGUAGE", language)
   };
   const t = useTranslations();
 

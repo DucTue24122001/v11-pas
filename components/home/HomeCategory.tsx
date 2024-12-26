@@ -11,6 +11,7 @@ import fishingImg from "@/public/nav-png/fh.png"
 import sportImg from "@/public/nav-png/sports.png"
 import lotteryImg from "@/public/nav-png/lottery.png"
 import liveArenaImg from "@/public/nav-png/livearena.png"
+import promoImg from "@/public/nav-png/promotion.png"
 import categoryPointer from "@/public/images/category_pointer.png"
 import CategoryItem from './home-category/CategoryItem'
 import { useDispatch, useSelector } from 'react-redux'
@@ -27,6 +28,7 @@ import fishingActive from "@/public/nav-png/fh_active.png"
 import sportActive from "@/public/nav-png/sports_active.png"
 import lotteryActive from "@/public/nav-png/lottery_active.png"
 import livearenaActive from "@/public/nav-png/livearena_active.png"
+import promoActive from "@/public/nav-png/promotion_active.png"
 import { useParams, useRouter } from 'next/navigation'
 
 const HomeCategory = () => {
@@ -68,8 +70,7 @@ const HomeCategory = () => {
 
   return (
     <>
-    <Box 
-      zIndex={100} ref={categoryRef}>
+    <Box zIndex={100} ref={categoryRef}>
       <Box>
         {breakpoint ? 
           <Flex w={"100vw"} pos={"relative"} zIndex={2} overflowX={"auto"} 
@@ -96,18 +97,20 @@ const HomeCategory = () => {
             {categoryList.map((category, i) => (
               <Flex key={i} alignItems={"center"} _hover={{color:"#000"}} gap={2} p={"10px"} cursor={"pointer"} onClick={() => {
                 dispatch(clientAction.setCategorySelect(category.value))
-              }}>
-                <Image alt='category' src={currentCategorySelect !== category.value ? category.icon : category.icon_active} boxSize={"30px"}/>
+                }}>
+                {currentCategorySelect !== category.value ? 
+                <Image alt='category' src={category.icon} boxSize={"30px"}/>
+                : 
+                <Image alt='category' src={category.icon_active} boxSize={"30px"}/>
+                }
                 <Text color={currentCategorySelect !== category.value ? "#98a2b3" :"#000"} fontSize={16} fontWeight={600}>{category.name}</Text>
               </Flex>
             ))}
           </Flex>
         }
       </Box>
-      
     </Box>
     {isShowPlayingGameModal && <PlayingGameModal/>}
-
     </>
   )
 }

@@ -71,7 +71,7 @@ const Vip = () => {
     return (
       <Card minH={"80vh"}>
         <Center py={"10px"}>
-          <Spinner color={tenancy?.mainColor || colors.primary}/>
+          <Spinner color={colors.primary}/>
         </Center>
       </Card>
     )
@@ -85,14 +85,13 @@ const Vip = () => {
             <Text color={colors.default.gray}>{t("last_update")} {moment(accountVipDetail?.lastModificationTime).format("hh:mm, DD MMM YYYY")}</Text>
             <VipInfo/>
             {accountVipDetail?.qrReferer && <>
-              <Image src={accountVipDetail?.qrReferer} alt='qr'
-                w={"150px"}/>
+              <Image src={accountVipDetail?.qrReferer} alt='qr' w={"150px"}/>
               <Text textTransform={'uppercase'} fontWeight={700} fontSize={"18px"}>{t("invite_friend")}</Text>
               <DefaultButton w={"50%"} onClick={downloadFile}>{t("share")}</DefaultButton>
             </>}
           </Center>
           <Box pt={"10px"}>
-            <Text color={tenancy?.mainColor || colors.primary} fontSize={"16px"}>{t('referral_code')}</Text>
+            <Text color={colors.primary} fontSize={"16px"}>{t('referral_code')}</Text>
             <Flex gap={2} alignItems={'center'}>
               <Flex sx={referralContainer} h={"50px"}>
                 <Text color={colors.default.gray}>{accountVipDetail?.refferalCode}</Text>
@@ -101,7 +100,7 @@ const Vip = () => {
             </Flex>
           </Box>
           <Box pt={"10px"}>
-            <Text color={tenancy?.mainColor || colors.primary} fontSize={"16px"}>{t("referral_link")}</Text>
+            <Text color={colors.primary} fontSize={"16px"}>{t("referral_link")}</Text>
             <Flex gap={2} alignItems={'center'}>
               <Flex sx={referralContainer} h={"50px"}>
                 <Text color={colors.default.gray}>{protocol}//{host}/register?invitation={accountVipDetail?.refferalCode}</Text>
@@ -129,8 +128,8 @@ const Vip = () => {
             <Flex sx={tableVip} key={i}>
               <Text sx={tableItem} textTransform={'uppercase'}>{tier?.tier}</Text>
               <Text sx={tableItem} textAlign={"end"}>{numberWithCommas(tier?.requirement)}</Text>
-              <Text sx={tableItem} textAlign={"end"} color={colors.default.green}>{convertDecimalNum(tier?.rewardTurnover)}</Text>
-              <Text sx={tableItem} textAlign={"end"} color={colors.default.green}>{tier?.rewards}</Text>
+              <Text sx={tableItem} textAlign={"end"} color={colors.primary}>{convertDecimalNum(tier?.rewardTurnover)}</Text>
+              <Text sx={tableItem} textAlign={"end"} color={colors.primary}>{tier?.rewards}</Text>
             </Flex>
           ))}
         </Box>

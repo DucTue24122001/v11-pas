@@ -111,6 +111,7 @@ const LoginSection = () => {
               tabIndex={1}
               name={LoginFormEnum.Username}
               borderColor={colors.default.white}
+              color={colors.default.black}
               onChange={loginInputHandler}
             />
             <Center position={"absolute"} color={colors.check} right={0}>
@@ -135,6 +136,7 @@ const LoginSection = () => {
               tabIndex={2}
               name={LoginFormEnum.Password}
               borderColor={colors.default.white}
+              color={colors.default.black}
               onChange={loginInputHandler}
             />
             {isError && (

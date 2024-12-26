@@ -71,7 +71,8 @@ const Withdraw = () => {
             key={bank.id}
             border={
               currentWithdraw === bank.id
-                ? `2px solid ${tenancy?.mainColor || colors.primary}`
+                // ? `2px solid ${tenancy?.mainColor || colors.primary}`
+                ? `2px solid ${colors.primary}`
                 : `2px solid ${colors.default.white}`
             }
             onClick={() => dispatch(accountAction.setCurrentWithdraw(bank.id))}
@@ -97,24 +98,25 @@ const Withdraw = () => {
           key={"add"}
           border={
             currentWithdraw === WithdrawType.ADD
-              ? `2px solid ${tenancy?.mainColor || colors.primary}`
+              // ? `2px solid ${tenancy?.mainColor || colors.primary}`
+              ? `2px solid ${colors.primary}`
               : `2px solid ${colors.default.white}`
           }
           onClick={() =>
             dispatch(accountAction.setCurrentWithdraw(WithdrawType.ADD))
           }
-          minW={["110px", "110px", "160px", "160px"]}
+          minW={["110px", "110px", "110px", "110px"]}
         >
           <Image
             h={"30px"}
             objectFit={"cover"}
             src={addBankingIcon.src}
             alt="add-internet-banking"
-          ></Image>
+          />
           <Text>{t("add_bank")}</Text>
         </PaymentOption>
       </PaymentList>
-      {accountBankInfo.map((bank: any, i: number) => {
+      {accountBankInfo.map((bank: any, i: number) => {                                                                                       
         return (
           currentWithdraw === bank.id && (
             <Flex flexDir={"column"} gap={5} key={bank.id}>
